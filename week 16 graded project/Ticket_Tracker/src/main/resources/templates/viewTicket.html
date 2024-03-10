@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Ticket Tracker Application</title>
+<style>
+table{
+border-style: solid;
+align-content: center;
+border-collapse: collapse;
+}
+.nav-bar {
+	background-color: blue;
+	padding: 20px 10px 20px 10px;
+	color: white;
+	display: flex;
+	float: left;
+}
+.nav-bar a {
+	color: #f2f2f2;
+	text-align: center;
+}
+.active{
+background-color: blue;
+}
+.new{
+background-color: blue;
+}
+</style>
+</head>
+<body>
+<div class="nav-bar">
+		Ticket Tracker Application <a th:href="@{/admin/tickets}"><button
+				class="active">Tickets</button></a> <a th:href="@{/admin/newTicket}"><button
+				class="new">New Ticket</button></a>
+
+	</div>
+	<h1>Welcome to the Spring project view ticket details</h1>
+	<table border="1">
+		<thead>
+			<tr class="row">
+				<th>Ticket id</th>
+				<th>Ticket Title</th>
+				<th>Ticket Short Description</th>
+				<th>Created On</th>
+				<th>Content</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr th:object="${ticket}">
+				<td th:text="${ticket.slNo}"></td>
+				<td th:text="${ticket.ticketTitle}"></td>
+				<td th:text="${ticket.description}"></td>
+				<td th:text="${ticket.createdOn}"></td>
+				<td th:text="${ticket.content}"></td>
+
+			</tr>
+		</tbody>
+
+	</table>
+
+</body>
+</html>

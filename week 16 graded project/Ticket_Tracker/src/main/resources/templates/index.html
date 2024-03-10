@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Tracker Application</title>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        .container {
+            background-color: blue;
+            color: white;
+            overflow: hidden;
+            height: 50px;
+        }
+
+        .container a {
+            color: #f2f2f2;
+            text-align: center;
+            float: inherit;
+            padding: 12px 10px;
+        }
+
+        table {
+            border-style: solid;
+            border-collapse: collapse;
+        }
+
+        .row {
+            background-color: black;
+        }
+
+        th {
+            color: white;
+        }
+
+        thead {
+            text-align: center;
+            color: black;
+            padding: 10px;
+        }
+
+        .edit {
+            background-color: blue;
+        }
+
+        .ser {
+            background-color: blue;
+            width: 100px;
+            height: 20px;
+        }
+
+        .delete {
+            background-color: red;
+        }
+
+        .view {
+            background-color: aqua;
+        }
+
+        .list {
+            align-content: left;
+        }
+
+        .active {
+            background-color: blue;
+        }
+
+        .new {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span>Ticket Tracker Application</span>
+        <a th:href="@{/admin/tickets}">Tickets</a><a th:href="@{/admin/newTicket}">NewTickets</a>
+    </div>
+    <div>
+        <div align="center">
+            <h1 class="list">List Of Tickets</h1>
+            <form action="/admin/search" method="get">
+                <input type="search" name="title" />
+                <input type="submit" class="ser" value="Search" /><br> <br>
+            </form>
+            <table border="1">
+                <thead>
+                    <tr class="row">
+                        <th>Ticket id</th>
+                        <th>Ticket Title</th>
+                        <th>Ticket Short Description</th>
+                        <th>Created On</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="ticket:${ticketList}">
+                        <td th:text="${ticket.slNo}"></td>
+                        <td th:text="${ticket.ticketTitle}"></td>
+                        <td th:text="${ticket.description}"></td>
+                        <td th:text="${ticket.createdOn}"></td>
+                        <td>
+                            <a type="submit" th:href="@{/admin/editTicket/{slNo}(slNo=${ticket.slNo})}">
+                                <button class="edit">Edit</button>
+                            </a>
+                            <a type="submit" th:href="@{/admin/{slNo}/delete(slNo=${ticket.slNo})}">
+                                <button class="delete">Delete</button>
+                            </a>
+                            <a type="submit" th:href="@{/admin/{slNo}/view(slNo=${ticket.slNo})}">
+                                <button class="view">View</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

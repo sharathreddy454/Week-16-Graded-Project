@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Ticket Tracker Application</title>
+<style type="text/css">
+form {
+	height: 500px;
+	width: 300px;
+}
+
+.nav-bar {
+	background-color: blue;
+	padding: 20px 10px 20px 10px;
+	color: white;
+	display: flex;
+}
+.nav-bar a {
+	color: #f2f2f2;
+	text-align: center;
+}
+.active{
+background-color: blue;
+}
+.new{
+background-color: blue;
+}
+.sub{
+background-color: black;
+color: white;}
+</style>
+
+</head>
+<body>
+	<div class="nav-bar">
+		Ticket Tracker Application &nbsp;&nbsp;<a th:href="@{/admin/tickets}"><button
+				class="active">Tickets</button></a> <a th:href="@{/admin/newTicket}"><button
+				class="new">New Ticket</button></a>
+
+	</div>
+	<div align="center" border="1">
+		<table border="1">
+			<form action="#" th:action="@{/admin/saveTicket}"
+				th:object="${ticket}" method="post">
+
+				<h2 align="center">Edit Ticket</h2>
+
+				<hr>
+				<input type="hidden" th:field="*{slNo}" /> <label>Title
+					Title</label> <br> <input type="text" th:field="*{ticketTitle}" /><br>
+				<br> <label>Short Description</label> <br>
+				<textarea th:field="*{description}"></textarea>
+				 <input type="hidden" th:field="*{createdOn}" readonly>
+				<br> <br> <label>Content</label><br>
+				<textarea rows="10" cols="30" th:field="*{content}"></textarea>
+				<br> <br> <input type="submit" class="sub" value="Update">
+
+			</form>
+		</table>
+	</div>
+
+</body>
+</html>
